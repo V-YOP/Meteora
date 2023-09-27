@@ -1,17 +1,35 @@
 import { useSnippets } from '@/Api'
-import { useEffect } from 'react'
+import { Box, Divider, Flex, Heading, Link, List, ListItem, UnorderedList, VStack } from '@chakra-ui/layout'
+import { useEffect, useMemo } from 'react'
 
 function Home() {
   const data = useSnippets()
   useEffect(() => {
     console.log(data)
   }, [data])
+  const categories = useMemo<[main: string, sub: string[]][]>(() => {
+    const res: Record<string, string[]> = {};
+    data.categories.forEach(([main, sub]) => {
+      if (!res[main]) res[main] = [];
+      res[main].push(sub)
+    })
+    return Object.entries(res)
+  }, [data])
   return (
-    <>
-      {data.categories.map(category => {
-        return `${category.slice(0, 2).join("->")}`
-      }).map(str => <><p>{str}</p><br/></>)}
-    </>
+    <VStack width='fit-content' ml='auto' mr='auto' spacing={8}>
+      {categories.map(([main, subs]) => {
+        return (
+          <Flex gap={4} direction='column' key={main} w={72}>
+            <Heading>{main}</Heading>
+            <List display='flex'>
+              {subs.map(sub => (
+                <ListItem key={main + sub} flexBasis={0} flexGrow={1}><Link>{sub}</Link></ListItem>
+              ))}
+            </List>
+          </Flex>
+        );
+      }).reduce((acc, x) => <>{acc}<Divider w={96} overflow={'hidden'}/>{x}</>, <></>)}
+    </VStack>
   )
 }
 
