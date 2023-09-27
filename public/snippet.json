@@ -1,0 +1,63 @@
+[
+   {
+      "categories" : [
+         "Frontend",
+         "Typescript"
+      ],
+      "lang" : "java",
+      "desc" : "大概就是这样，lol。",
+      "header" : {
+         "name" : "Hello, World!",
+         "tag" : [
+            "Hello, World!"
+         ]
+      },
+      "snippet" : "System.out.println(\"Hello, World!\");"
+   },
+   {
+      "lang" : "java",
+      "categories" : [
+         "Frontend",
+         "React"
+      ],
+      "desc" : "大概就是这样，lol。",
+      "snippet" : "System.out.println(\"Hello, World!\");",
+      "header" : {
+         "tag" : [
+            "Hello, World!"
+         ],
+         "name" : "Hello, World!"
+      }
+   },
+   {
+      "snippet" : "System.out.println(\"Hello, World!\");",
+      "header" : {
+         "name" : "Hello, World!",
+         "tag" : [
+            "Hello, World!"
+         ]
+      },
+      "lang" : "java",
+      "categories" : [
+         "Backend",
+         "Java"
+      ],
+      "desc" : "大概就是这样，lol。"
+   },
+   {
+      "snippet" : "System.out.println(\"Hello, World!\");",
+      "header" : {
+         "name" : "Hello, World!",
+         "tag" : [
+            "Hello, World!"
+         ]
+      },
+      "desc" : "大概就是这样，lol。",
+      "categories" : [
+         "Backend",
+         "Spring"
+      ],
+      "lang" : "java"
+   }
+]
+

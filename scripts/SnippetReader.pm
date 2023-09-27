@@ -8,6 +8,8 @@ use JSON::PP;
 use File::Find;
 use lib '.';
 use File::Spec::Functions qw/ splitdir /;
+use utf8;
+use Encode qw/ is_utf8 /;
 
 sub test_md_text;
 
@@ -49,7 +51,9 @@ sub read_snippets_dir {
     \@results;
 }
 
-say encode_json read_snippets_dir $ARGV[0];
+# 避免中文乱码问题……疑似是原本就UTF-8编码的中文又被进行了一次UTF-8编码
+my $json = JSON::PP->new->pretty->allow_nonref;
+say $json->encode(read_snippets_dir $ARGV[0]);
 
 # 输入Markdown文本，包含YAML头部
 sub test_md_text {
