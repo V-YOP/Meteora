@@ -1,63 +1,70 @@
 [
    {
-      "categories" : [
-         "Frontend",
-         "Typescript"
+      "segments" : [
+         "```java\nSystem.out.println(\"Hello, World!\");\n```\n\n`System.out`获得标准输出流，提供了诸多方便输出的方法。\n\n```java\nSystem.out.printf(\"name: %s, age: %d\\n\", \"Haruka\", 17);\n```"
       ],
-      "lang" : "java",
-      "desc" : "大概就是这样，lol。",
-      "header" : {
-         "name" : "Hello, World!",
-         "tag" : [
-            "Hello, World!"
-         ]
-      },
-      "snippet" : "System.out.println(\"Hello, World!\");"
-   },
-   {
-      "lang" : "java",
       "categories" : [
-         "Frontend",
-         "React"
-      ],
-      "desc" : "大概就是这样，lol。",
-      "snippet" : "System.out.println(\"Hello, World!\");",
-      "header" : {
-         "tag" : [
-            "Hello, World!"
-         ],
-         "name" : "Hello, World!"
-      }
-   },
-   {
-      "snippet" : "System.out.println(\"Hello, World!\");",
-      "header" : {
-         "name" : "Hello, World!",
-         "tag" : [
-            "Hello, World!"
-         ]
-      },
-      "lang" : "java",
-      "categories" : [
-         "Backend",
+         "工作相关",
          "Java"
       ],
-      "desc" : "大概就是这样，lol。"
+      "tag" : [
+         "Hello, World!"
+      ],
+      "title" : "Hello, World!"
    },
    {
-      "snippet" : "System.out.println(\"Hello, World!\");",
-      "header" : {
-         "name" : "Hello, World!",
-         "tag" : [
-            "Hello, World!"
-         ]
-      },
-      "desc" : "大概就是这样，lol。",
+      "title" : "Date",
       "categories" : [
-         "Backend",
-         "Spring"
+         "工作相关",
+         "Java",
+         "日期 & 时间"
       ],
-      "lang" : "java"
+      "tag" : [
+         "日期",
+         "时间"
+      ],
+      "segments" : [
+         "```java\nSystem.out.println(\"Hello, World!\");\n```\n\n`System.out`获得标准输出流，提供了诸多方便输出的方法。\n\n```java\nSystem.out.printf(\"name: %s, age: %d\\n\", \"Haruka\", 17);\n```"
+      ]
+   },
+   {
+      "title" : null,
+      "segments" : [
+         "```java\nSystem.out.println(\"Hello, World!\");\n```\n\n大概就是这样，lol。"
+      ],
+      "tag" : [
+         "Hello, World!"
+      ],
+      "categories" : [
+         "前端",
+         "Typescript"
+      ]
+   },
+   {
+      "segments" : [
+         "```java\nSystem.out.println(\"Hello, World!\");\n```\n\n大概就是这样，lol。"
+      ],
+      "tag" : [
+         "Hello, World!"
+      ],
+      "categories" : [
+         "前端",
+         "Javascript"
+      ],
+      "title" : null
+   },
+   {
+      "segments" : [
+         "```java\nSystem.out.println(\"Hello, World!\");\n```\n\n大概就是这样，lol。"
+      ],
+      "tag" : [
+         "Hello, World!"
+      ],
+      "categories" : [
+         "前端",
+         "React"
+      ],
+      "title" : null
    }
 ]
 

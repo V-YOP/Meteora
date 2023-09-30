@@ -1,15 +1,14 @@
 #!/usr/bin/perl
-use strict;
-use warnings FATAL => 'all';
-use v5.16;
+use v5.36;
 use YAML;
 use Data::Dumper;
 use JSON::PP;
 use File::Find;
 use lib '.';
-use File::Spec::Functions qw/ splitdir /;
+use File::Spec::Functions qw/splitdir/;
 use utf8;
-use Encode qw/ is_utf8 /;
+use Encode;
+use Encode::Locale;
 
 sub test_md_text;
 
@@ -18,16 +17,19 @@ sub parse_markdown_snippet {
     /^[\n\s]*((---|\+\+\+)?[\n\s]+|[\n\s]*)(.*)[\n\s]+(---|\+\+\+)[\n\s]+(.*)/s or die 'parse yaml header failed';
     my $yaml_header = $3;
     $_ = $5;
-    s/\n\n\n/\n\n/s;
-    /```[\n\s]*(\w+)[\n\s]+(.*?)[\n\s]*```[\n\s]+(.*)[\n\s]*$/s or die 'parse snippet and description failed';
-    my $lang = $1;
-    my $snippet = $2;
-    my $desc = $3;
-    {
-        header  => (Load $yaml_header),
-            lang    => $lang,
-            snippet => $snippet,
-            desc    => $desc,
+    s/\n\n\n/\n\n/sg;
+    s/^[\n\s]*//;
+    s/[\n\s]*$//;
+    # /```[\n\s]*(\w+)[\n\s]+(.*?)[\n\s]*```[\n\s]+(.*)[\n\s]*$/s or die 'parse snippet and description failed';
+    # my $lang = $1;
+    # my $snippet = $2;
+    # my $desc = $3;
+    my @segments = split '---';
+    my $header = Load $yaml_header;
+    return {
+        title  => $header->{title},
+        tag => $header->{tag},
+        segments => \@segments,
     }
 }
 
@@ -36,12 +38,13 @@ sub read_snippets_dir {
     chdir $path;
     my @results = ();
     find sub {
+        $_ = decode 'locale', $_ foreach ($File::Find::dir, $_, $File::Find::name);
         return if not -T or not /\.md$/;
-        my @dirs = splitdir($File::Find::dir);
+        my @dirs = splitdir $File::Find::dir;
         shift @dirs if $dirs[0] eq '.';
         # say "categories: [@{[join ', ', @dirs]}], parsing $File::Find::name ...";
         eval {
-            open my $md_fh, '<', $_ or die "read file failed";
+            open my $md_fh, '<:encoding(UTF-8)', $_ or die "read file failed";
             local $/ = undef;
             my $snippet = parse_markdown_snippet scalar <$md_fh>;
             $snippet->{categories} = \@dirs;
@@ -51,8 +54,7 @@ sub read_snippets_dir {
     \@results;
 }
 
-# 避免中文乱码问题……疑似是原本就UTF-8编码的中文又被进行了一次UTF-8编码
-my $json = JSON::PP->new->pretty->allow_nonref;
+my $json = JSON::PP->new->utf8->pretty->allow_nonref;
 say $json->encode(read_snippets_dir $ARGV[0]);
 
 # 输入Markdown文本，包含YAML头部
